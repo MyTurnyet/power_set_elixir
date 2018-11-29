@@ -1,5 +1,5 @@
 defmodule ElixirPowerSet do
   def powerset_for_string(textToParse) do
-    [[], ["a"]]
+    [[], [textToParse]]
   end
 end
