@@ -1,5 +1,5 @@
 defmodule ElixirPowerSet do
-  def powerset_for_string(textToParse) do
-    [[], [textToParse]]
+  def split_string_to_list(textToParse) do
+    String.split(textToParse, ",", trim: true)
   end
 end

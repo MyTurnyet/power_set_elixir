@@ -4,15 +4,10 @@
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `power_set_elixir` to your list of dependencies in `mix.exs`:
+Download this repository, then run:
 
 ```elixir
-def deps do
-  [
-    {:power_set_elixir, "~> 0.1.0"}
-  ]
-end
+mix deps.get
 ```
 
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
