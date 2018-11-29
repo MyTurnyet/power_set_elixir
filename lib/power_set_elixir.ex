@@ -10,4 +10,11 @@ defmodule ElixirPowerSet do
     )
     |> Enum.join(",")
   end
+
+  def sort_list(list_to_sort) do
+    list_to_sort
+    |> Enum.sort()
+    |> Enum.sort_by(&length/1)
+  end
+  
 end
