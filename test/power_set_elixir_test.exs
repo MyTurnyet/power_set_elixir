@@ -1,8 +1,9 @@
 defmodule ElixirPowerSetTest do
   use ExUnit.Case
-  doctest ElixirPowerSet
 
-  test "greets the world" do
-    assert ElixirPowerSet.hello() == :world
+  describe "ElixirPowerSet unit tests" do
+    test "Should Return list as string" do
+      assert [[], ["a"]] == ElixirPowerSet.powerset_for_string("a")
+    end
   end
 end

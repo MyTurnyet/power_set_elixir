@@ -1,18 +1,5 @@
 defmodule ElixirPowerSet do
-  @moduledoc """
-  Documentation for ElixirPowerSet.
-  """
-
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> ElixirPowerSet.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def powerset_for_string(textToParse) do
+    [[], ["a"]]
   end
 end
