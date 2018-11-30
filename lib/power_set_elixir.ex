@@ -8,11 +8,12 @@ defmodule ElixirPowerSet do
   end
 
   def format_list_as_string(list_to_convert) do
-    # Enum.map(
-    #   list_to_convert,
-    #   fn list_item -> "{#{list_item}}" end
-    # )
-    # |> Enum.join(",")
+    for(
+      list_item <- list_to_convert,
+      do: map_list_item(list_item)
+    )
+    |> Enum.map(fn item -> item end)
+    |> Enum.join(",")
   end
 
   def map_list_item(list_item) do

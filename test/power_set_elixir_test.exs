@@ -17,10 +17,10 @@ defmodule ElixirPowerSetTest do
       assert expected_output == map_list_item(["a", "b"])
     end
 
-    # test "Should Return output as formatted string  from list a" do
-    #   expected_output = "{},{a}"
-    #   assert expected_output == format_list_as_string([[], ["a"]])
-    # end
+    test "Should Return output as formatted string  from list a" do
+      expected_output = "{},{a}"
+      assert expected_output == format_list_as_string([[], ["a"]])
+    end
 
     # test "Should Return output as formatted string from list a,b" do
     #   expected_output = "{},{a},{b},{a,b}"
