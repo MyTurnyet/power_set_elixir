@@ -5,7 +5,11 @@ defmodule FileReaderTest do
   describe "FileReader unit tests" do
     test "Should return Error if file path doesn't exist" do
       file_path = "test/powerset_input.txt"
-      assert {:error, :enoent} == read_file(file_path)
+
+
+      assert {:error,
+              "File Not Found: /mnt/d/Development/power_set_elixir/test/powerset_input.txt"} ==
+               read_file(file_path)
     end
 
     test "Should return :ok if file path doesn't exist" do

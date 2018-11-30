@@ -1,4 +1,6 @@
 defmodule ElixirPowerSet do
+  alias FileReader
+
   def split_string_to_list(text_to_parse) do
     text_to_parse
     |> String.replace_trailing("\n", "")
@@ -47,11 +49,21 @@ defmodule ElixirPowerSet do
     end ++ output_list
   end
 
-  def parse(test_to_parse) do
-    test_to_parse
+  def parse({:error, message}) do
+    message
+  end
+
+  def parse({:ok, text_to_parse}) do
+    text_to_parse
     |> split_string_to_list()
     |> get_powersets()
     |> sort_list()
     |> format_list_as_string()
+  end
+
+  def start(path) do
+    path
+    |> FileReader.read_file()
+    |> parse()
   end
 end

@@ -11,4 +11,6 @@ Having only done a little bit of Elixir, I thought it would be a nice option for
  The hardest part so far was actually formattinh the list into the output string.  It worked for
  single dimensional lists, but when I hit a multi-dimensional (ie:{a,b}), I had to recursively 
  format that list as well.
+
+ I overloaded the parsing so that we can show when the path to the file is incorrect
  
