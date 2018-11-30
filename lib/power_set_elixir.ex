@@ -1,6 +1,8 @@
 defmodule ElixirPowerSet do
   def split_string_to_list(text_to_parse) do
-    String.split(text_to_parse, ",", trim: true)
+    text_to_parse
+    |> String.replace_trailing("\n", "")
+    |> String.split(",", trim: true)
   end
 
   def format_list_as_string([]) do

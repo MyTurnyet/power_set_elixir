@@ -6,7 +6,9 @@ defmodule ElixirPowerSetTest do
     test "Should split string to list" do
       assert ["a", "b"] == split_string_to_list("a,b")
     end
-
+    test "Should split string with newline to list" do
+      assert ["a", "b"] == split_string_to_list("a,b\n")
+    end
     test "Should map_list_item [a] to string" do
       expected_output = "{a}"
       assert expected_output == map_list_item(["a"])
