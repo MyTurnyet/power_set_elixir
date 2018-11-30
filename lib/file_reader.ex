@@ -1,4 +1,5 @@
 defmodule FileReader do
+
   def read_file(path) do
     full_path =
       path

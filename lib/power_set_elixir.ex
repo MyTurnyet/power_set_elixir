@@ -61,9 +61,41 @@ defmodule ElixirPowerSet do
     |> format_list_as_string()
   end
 
-  def start(path) do
-    path
+  def main(args \\ []) do
+    args
+    |> parse_args
+    |> read_file
+  end
+
+  defp read_file({:error, message}) do
+    message
+    |> write_to_output()
+  end
+
+  defp read_file(file_path) do
+    file_path
     |> FileReader.read_file()
     |> parse()
+    |> write_to_output
   end
+
+  defp write_to_output(message) do
+    message
+    |> IO.puts()
+  end
+
+  def parse_args([]) do
+    {:error, "No file path was passed to the applicaion"}
+  end
+
+  def parse_args([file_path]) do
+    file_path
+  end
+
+  # def start(path) do
+  #   path
+  #   |> FileReader.read_file()
+  #   |> parse()
+  #   |> IO.puts()
+  # end
 end
