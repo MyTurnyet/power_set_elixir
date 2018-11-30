@@ -13,3 +13,6 @@ Having only done a little bit of Elixir, I thought it would be a nice option for
  format that list as well.
 
  I overloaded the parsing so that we can show when the path to the file is incorrect
+
+ I also updated the code to create a executable that runs at command line.  This requires updating
+ the tests to read command line output

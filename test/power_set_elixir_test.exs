@@ -1,5 +1,6 @@
 defmodule ElixirPowerSetTest do
   use ExUnit.Case
+  import ExUnit.CaptureIO
   import ElixirPowerSet
 
   describe "ElixirPowerSet unit tests" do
@@ -57,24 +58,24 @@ defmodule ElixirPowerSetTest do
     end
 
     test "Calling main/1 without arguments should throw error" do
-      output = ElixirPowerSet.main()
-      assert output == "No file path was passed to the applicaion"
+      output =  capture_io(fn ->  ElixirPowerSet.main() end)
+      assert output == "No file path was passed to the applicaion\n"
     end
   end
 
   describe "ElixirPowerSet functional" do
     test "Calling Start with a path should produce error" do
-      output = ElixirPowerSet.main(["test/input-powerset.txt"])
+      output = capture_io(fn -> ElixirPowerSet.main(["test/input-powerset.txt"]) end)
 
       assert output ==
-               "File Not Found: /mnt/d/Development/power_set_elixir/test/input-powerset.txt"
+               "File Not Found: /mnt/d/Development/power_set_elixir/test/input-powerset.txt\n"
     end
 
     test "Calling Start with a path should produce the powerset" do
-      output = ElixirPowerSet.main(["test/powerset-input.txt"])
+      output = capture_io(fn -> ElixirPowerSet.main(["test/powerset-input.txt"]) end)
 
       assert output ==
-               "{},{a},{b},{c},{d},{e},{a,b},{a,c},{a,d},{a,e},{b,c},{b,d},{b,e},{c,d},{c,e},{d,e},{a,b,c},{a,b,d},{a,b,e},{a,c,d},{a,c,e},{a,d,e},{b,c,d},{b,c,e},{b,d,e},{c,d,e},{a,b,c,d},{a,b,c,e},{a,b,d,e},{a,c,d,e},{b,c,d,e},{a,b,c,d,e}"
+               "{},{a},{b},{c},{d},{e},{a,b},{a,c},{a,d},{a,e},{b,c},{b,d},{b,e},{c,d},{c,e},{d,e},{a,b,c},{a,b,d},{a,b,e},{a,c,d},{a,c,e},{a,d,e},{b,c,d},{b,c,e},{b,d,e},{c,d,e},{a,b,c,d},{a,b,c,e},{a,b,d,e},{a,c,d,e},{b,c,d,e},{a,b,c,d,e}\n"
     end
   end
 end
