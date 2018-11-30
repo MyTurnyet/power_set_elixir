@@ -1,0 +1,14 @@
+Having only done a little bit of Elixir, I thought it would be a nice option for my second version
+ of the powerset calculator.
+
+ I created modules for the calculator and the file reader functionality, and could possibly extract
+ the actual powersets into structures that will let me work in a little more typed system.
+
+ I started out with creation of the calculator module.  much of the functionality is basically the same, 
+ but instead of bit shifting, I used recursion, passing around the [head|tail] of the input and 
+ then sorting the output powersets so that they would order correctly.
+
+ The hardest part so far was actually formattinh the list into the output string.  It worked for
+ single dimensional lists, but when I hit a multi-dimensional (ie:{a,b}), I had to recursively 
+ format that list as well.
+ 
