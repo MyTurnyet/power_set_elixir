@@ -42,40 +42,56 @@ defmodule ElixirPowerSetTest do
       assert expected_output == get_powersets(["a", "b"])
     end
 
-    test "Should return string of powersets from list[a,b]" do
+    test "Should return string of powersets from string a,b" do
       expected_output = "{},{a},{b},{a,b}"
       assert expected_output == parse({:ok, "a,b"})
     end
 
+    test "Should return string of powersets from list[a,b]" do
+      expected_output = "{},{a},{b},{a,b}"
+      assert expected_output == parse(["a", "b"])
+    end
+
     test "Calling parse_args/1 without arguments should throw error" do
-      output = ElixirPowerSet.parse_args([])
+      output = parse_args([])
       assert output == {:error, "No file path was passed to the applicaion"}
+    end
+
+    test "Calling parse_args/1 --inline argument" do
+      output = ElixirPowerSet.parse_args(["--inline", "a,b"])
+      assert output == {[inline: true], ["a", "b"]}
     end
 
     test "Calling parse_args/1 with argument should return it" do
       output = ElixirPowerSet.parse_args(["input.txt"])
-      assert output == "input.txt"
-    end
-
-    test "Calling main/1 without arguments should throw error" do
-      output =  capture_io(fn ->  ElixirPowerSet.main() end)
-      assert output == "No file path was passed to the applicaion\n"
+      assert output == {[], ["input.txt"]}
     end
   end
 
   describe "ElixirPowerSet functional" do
-    test "Calling Start with a path should produce error" do
+    test "Calling main/1 with a path should produce error" do
       output = capture_io(fn -> ElixirPowerSet.main(["test/input-powerset.txt"]) end)
 
       assert output ==
                "File Not Found: /mnt/d/Development/power_set_elixir/test/input-powerset.txt\n"
     end
 
-    test "Calling Start with a path should produce the powerset" do
+    test "Calling main/1 without arguments should throw error" do
+      output = capture_io(fn -> ElixirPowerSet.main() end)
+      assert output == "No file path was passed to the applicaion\n"
+    end
+
+    test "Calling main/1 with a path should produce the powerset" do
       output = capture_io(fn -> ElixirPowerSet.main(["test/powerset-input.txt"]) end)
 
       assert output ==
                "{},{a},{b},{c},{d},{e},{a,b},{a,c},{a,d},{a,e},{b,c},{b,d},{b,e},{c,d},{c,e},{d,e},{a,b,c},{a,b,d},{a,b,e},{a,c,d},{a,c,e},{a,d,e},{b,c,d},{b,c,e},{b,d,e},{c,d,e},{a,b,c,d},{a,b,c,e},{a,b,d,e},{a,c,d,e},{b,c,d,e},{a,b,c,d,e}\n"
+    end
+
+    test "Calling main/1 with the inline argument and a string" do
+      output = capture_io(fn -> ElixirPowerSet.main(["--inline", "a,b"]) end)
+
+      assert output == "{},{a},{b},{a,b}\n"
     end
   end
 end

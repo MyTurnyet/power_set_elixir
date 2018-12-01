@@ -56,6 +56,16 @@ defmodule ElixirPowerSet do
   def parse({:ok, text_to_parse}) do
     text_to_parse
     |> split_string_to_list()
+    |> calculate_and_sort()
+  end
+
+  def parse(list_to_parse) do
+    list_to_parse
+    |> calculate_and_sort()
+  end
+
+  defp calculate_and_sort(list_to_parse) do
+    list_to_parse
     |> get_powersets()
     |> sort_list()
     |> format_list_as_string()
@@ -65,18 +75,26 @@ defmodule ElixirPowerSet do
     args
     |> parse_args
     |> read_file
+    |> write_to_output
   end
 
   defp read_file({:error, message}) do
     message
-    |> write_to_output()
   end
 
-  defp read_file(file_path) do
+  defp read_file({[], file_path}) do
     file_path
     |> FileReader.read_file()
     |> parse()
-    |> write_to_output
+  end
+
+  defp read_file({options, base_set}) do
+    if options[:inline] do
+      base_set
+      |> parse()
+    else
+      {:error, "That is an unknown argument"}
+    end
   end
 
   defp write_to_output(message) do
@@ -88,14 +106,14 @@ defmodule ElixirPowerSet do
     {:error, "No file path was passed to the applicaion"}
   end
 
-  def parse_args([file_path]) do
-    file_path
-  end
+  def parse_args(args) do
+    {option, base_set, _} =
+      args
+      |> OptionParser.parse(switches: [inline: :boolean])
 
-  # def start(path) do
-  #   path
-  #   |> FileReader.read_file()
-  #   |> parse()
-  #   |> IO.puts()
-  # end
+    {option,
+     base_set
+     |> List.first()
+     |> String.split(",", trim: true)}
+  end
 end
